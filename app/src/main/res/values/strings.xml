@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">Costurapp</string>
+    <string name="descricao">Descrição</string>
+    <string name="nome">Nome</string>
+    <string name="estampa">Estampa</string>
+    <string-array name="tipos_material">
+        <item>Tecido</item>
+        <item>Linha</item>
+        <item>Ziper</item>
+        <item>Botão</item>
+        <item>Gancho</item>
+    </string-array>
+    <string-array name="unidades_medida">
+        <item>Metros</item>
+        <item>Unidades</item>
+        <item>Centimetros</item>
+
+    </string-array>
+
 </resources>
