@@ -3,6 +3,11 @@
     <string name="descricao">Descrição</string>
     <string name="nome">Nome</string>
     <string name="estampa">Estampa</string>
+    <string name="tecido_plano">Tecido plano</string>
+    <string name="tecido_transparente">Tecido transparente</string>
+    <string name="overlock">Overlock</string>
+    <string name="estampado">Estampado</string>
+    <string name="salvar">Salvar</string>
     <string-array name="tipos_material">
         <item>Tecido</item>
         <item>Linha</item>
@@ -10,11 +15,24 @@
         <item>Botão</item>
         <item>Gancho</item>
     </string-array>
+
     <string-array name="unidades_medida">
         <item>Metros</item>
         <item>Unidades</item>
         <item>Centimetros</item>
-
     </string-array>
+
+    <string-array name="tamanhos">
+        <item>Pequeno</item>
+        <item>Medio</item>
+        <item>Grande</item>
+    </string-array>
+
+    <string-array name="tipo_ziper">
+        <item>Normal</item>
+        <item>Jeans</item>
+        <item>Invisivel</item>
+    </string-array>
+
 
 </resources>

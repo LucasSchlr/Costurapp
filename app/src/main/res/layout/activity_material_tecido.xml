@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/nome_material_layout"
         android:layout_width="match_parent"
@@ -18,17 +20,37 @@
             android:hint="@string/nome" />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/estampa_material_layout"
+        android:id="@+id/estampa_tecido_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/nome_material_layout">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/estampa_material"
+            android:id="@+id/estampa_tecido"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:hint="@string/estampa" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <Switch
+        android:id="@+id/tecido_plano"
+        android:layout_width="176dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="8dp"
+        android:switchPadding="10dp"
+        android:textAlignment="textEnd"
+        android:text="@string/tecido_plano"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/estampa_tecido_layout" />
+    <Switch
+        android:id="@+id/tecido_transparente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:switchPadding="10dp"
+        android:text="@string/tecido_transparente"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tecido_plano" />
 </androidx.constraintlayout.widget.ConstraintLayout>
