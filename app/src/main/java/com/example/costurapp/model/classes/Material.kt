@@ -1,16 +1,16 @@
 package com.example.costurapp.model.classes
 
 data class Material(
-    val TipoMaterial:TipoMaterial,
+    val TipoMaterial: TipoMaterial,
     val Descricao:String,
     val UnidadeMedida:UnidadeMedida,
-    val Nome:String,
-    val Estampa:String,
-    val TecidoPlano:Boolean,
-    val Transparente:Boolean,
-    val Overlock:Boolean,
-    val Tamanho:Tamanho,
-    val TipoZiper:TipoZiper,
-    val Estampado:Boolean
+    var Nome:String? = null,
+    var Estampa:String? = null,
+    var TecidoPlano:Boolean? = null,
+    var Transparente:Boolean? = null,
+    var TipoLinha:TipoLinha? = null,
+    var Tamanho:Tamanho? = null,
+    var TipoZiper:TipoZiper? = null,
+    var Estampado:Boolean? = null
 ) {
 }

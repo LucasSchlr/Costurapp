@@ -3,14 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent">
-
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/tamanho_material"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/tamanhos"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
     <Switch
         android:id="@+id/estampado"
         android:layout_width="wrap_content"
@@ -19,6 +11,6 @@
         android:switchPadding="10dp"
         android:text="@string/overlock"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tamanho_material" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

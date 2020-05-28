@@ -1,43 +1,95 @@
 package com.example.costurapp.view
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import com.example.costurapp.R
+import com.example.costurapp.model.classes.*
+import com.example.costurapp.model.databaseMaterial
+import com.example.costurapp.presenter.CadastroPresenter
 import kotlinx.android.synthetic.main.activity_material.*
+import kotlinx.android.synthetic.main.activity_material_botao.*
+import kotlinx.android.synthetic.main.activity_material_linha.*
+import kotlinx.android.synthetic.main.activity_material_tamanhos.*
+import kotlinx.android.synthetic.main.activity_material_tecido.*
+import kotlinx.android.synthetic.main.activity_material_ziper.*
 
-class MaterialActivity : AppCompatActivity() {
+class MaterialActivity : AppCompatActivity(),CadastroPresenter.viewCadastroMaterial {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_material)
-        desabilitaLayoutEspecifico()
+        desabilitaLayoutEspecificos()
+
+        Log.i("teste","chegou aqui ON CREATE")
 
         tipo_material.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-
-                }
-
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    desabilitaLayoutEspecifico()
+                    desabilitaLayoutEspecificos()
                     when (position){
                         0->layout_tecido.visibility = View.VISIBLE
                         1->layout_linha.visibility = View.VISIBLE
-                        2->layout_ziper.visibility = View.VISIBLE
-                        3->layout_botao.visibility = View.VISIBLE
-                        else->layout_gancho.visibility = View.VISIBLE
+                        2->{
+                            layout_tamanhos.visibility = View.VISIBLE
+                            layout_ziper.visibility = View.VISIBLE
+                        }
+                        3->{
+                            layout_tamanhos.visibility = View.VISIBLE
+                            layout_botao.visibility = View.VISIBLE
+                        }
+                        else->layout_tamanhos.visibility = View.VISIBLE
                     }
                 }
             }
     }
 
-    fun desabilitaLayoutEspecifico(){
+    fun desabilitaLayoutEspecificos(){
         layout_tecido.visibility = View.GONE
         layout_linha.visibility = View.GONE
         layout_ziper.visibility = View.GONE
-        layout_gancho.visibility = View.GONE
+        layout_tamanhos.visibility = View.GONE
         layout_botao.visibility = View.GONE
+    }
+
+    override fun contexto(): Context {
+        return this
+    }
+
+    override fun retornaMaterial(): Material{
+        val material = Material(
+            TipoMaterial = TipoMaterial.from(tipo_material.selectedItemPosition),
+            Descricao =  descricao_material.text.toString(),
+            UnidadeMedida = UnidadeMedida.from(unidade_medida.selectedItemPosition)
+        )
+
+        when (material.TipoMaterial){
+            TipoMaterial.TECIDO->{
+                material.Nome = nome_material.text.toString()
+                material.Estampa = estampa_tecido.text.toString()
+                material.TecidoPlano = tecido_plano.isChecked
+                material.Transparente = tecido_transparente.isChecked
+            }
+            TipoMaterial.LINHA->material.TipoLinha = TipoLinha.from(if (linha_overlock.isChecked){1}else{0})
+            TipoMaterial.ZIPER->{
+                material.Tamanho = Tamanho.from(tamanho_material.selectedItemPosition)
+                material.TipoZiper = TipoZiper.from(tipo_zipper.selectedItemPosition)
+            }
+            TipoMaterial.BOTAO->{
+                material.Tamanho = Tamanho.from(tamanho_material.selectedItemPosition)
+                material.Estampado = estampado.isChecked
+            }
+            else->layout_tamanhos.visibility = View.VISIBLE
+        }
+
+        return material
+    }
+    fun onClickSalvar(view:View){
+        Log.i("teste","chegou aqui activiti")
+        CadastroPresenter(this, databaseMaterial()).insereMaterial()
     }
 }

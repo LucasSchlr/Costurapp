@@ -5,20 +5,12 @@
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/tamanho_material"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/tamanhos"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/tipo_zipper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:entries="@array/tipo_ziper"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tamanho_material" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

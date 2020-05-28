@@ -43,30 +43,41 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:id="@+id/fragment_container"
+        android:id="@+id/container_tecido"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/unidade_medida">
-        <include
-            android:id="@+id/layout_tecido"
-            layout="@layout/activity_material_tecido" />
-        <include
-            android:id="@+id/layout_linha"
-            layout="@layout/activity_material_linha"/>
-        <include
-            android:id="@+id/layout_gancho"
-            layout="@layout/activity_material_gancho" />
-        <include
-            android:id="@+id/layout_ziper"
-            layout="@layout/activity_material_ziper"/>
-        <include
-            android:id="@+id/layout_botao"
-            layout="@layout/activity_material_botao"/>
+            <include
+                android:id="@+id/layout_tecido"
+                layout="@layout/activity_material_tecido"/>
+            <include
+                android:id="@+id/layout_linha"
+                layout="@layout/activity_material_linha"/>
+
+            <include
+                android:id="@+id/layout_tamanhos"
+                layout="@layout/activity_material_tamanhos"/>
     </FrameLayout>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:id="@+id/container_ziper"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/container_tecido">
+            <include
+                android:id="@+id/layout_ziper"
+                layout="@layout/activity_material_ziper"/>
+            <include
+                android:id="@+id/layout_botao"
+                layout="@layout/activity_material_botao"/>
+    </FrameLayout>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/salvar"
+        android:id="@+id/btSalvar"
+        android:onClick="onClickSalvar"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_container"/>
+        app:layout_constraintTop_toBottomOf="@id/container_ziper"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,14 +12,14 @@ class CosturappDataBaseHelper(
     context: Context
 ): SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION ) {
     override fun onCreate(db: SQLiteDatabase?) {
-        updateMyDatabase(db, 0, DB_VERSION)
+        updateMyDatabase(db, 0/*, DB_VERSION*/)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        updateMyDatabase(db, oldVersion, newVersion)
+        updateMyDatabase(db, oldVersion/*, newVersion*/)
     }
 
-    fun updateMyDatabase(db: SQLiteDatabase?, oldVersion: Int, newVersion:Int){
+    fun updateMyDatabase(db: SQLiteDatabase?, oldVersion: Int/*, newVersion:Int*/){
         if (oldVersion < 1){
             db?.execSQL(
                 "CREATE TABLE COMPRA (" +
@@ -38,7 +38,6 @@ class CosturappDataBaseHelper(
                         "VALOR_UNITARIO REAL);"
             )
 
-
             db?.execSQL(
                 "CREATE TABLE ENCOMENDA_VENDA (" +
                         "_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
@@ -55,13 +54,11 @@ class CosturappDataBaseHelper(
                         "QUANTIDADE INTEGER);"
             )
 
-
             db?.execSQL(
                 "CREATE TABLE MATERIAL_PRODUTO (" +
                         "ID_PRODUTO INTEGER," +
                         "ID_MATERIAL INTEGER," +
-                        "QUANTIDADE INTEGER"+
-                        "PRIMARY KEY(ID_PRODUTO,ID_MATERIA_PRIMA));"
+                        "QUANTIDADE INTEGER);"
             )
 
             db?.execSQL(
@@ -80,9 +77,8 @@ class CosturappDataBaseHelper(
                         //ZIPER
                         "TAMANHO INTEGER,"+//(PEQUENO, MEDIO, GRANDE)
                         "TIPO_ZIPER INTEGER,"+//NORMAL, JEANS, INVISIVEL
-                        "ESTAMPADO INTEGER);"//SIM, NÃO
+                        "ESTAMPADO TEXT);"//SIM, NÃO
             )
-
 
             db?.execSQL(
                 "CREATE TABLE PRODUTO (" +
