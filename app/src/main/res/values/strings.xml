@@ -8,6 +8,7 @@
     <string name="overlock">Overlock</string>
     <string name="estampado">Estampado</string>
     <string name="salvar">Salvar</string>
+    <string name="delete_item">Deletar cadastro</string>
     <string-array name="tipos_material">
         <item>Tecido</item>
         <item>Linha</item>

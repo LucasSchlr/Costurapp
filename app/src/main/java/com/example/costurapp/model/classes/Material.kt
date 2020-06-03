@@ -11,6 +11,7 @@ data class Material(
     var TipoLinha:TipoLinha? = null,
     var Tamanho:Tamanho? = null,
     var TipoZiper:TipoZiper? = null,
-    var Estampado:Boolean? = null
+    var Estampado:Boolean? = null,
+    var Ativo:Boolean = true
 ) {
 }

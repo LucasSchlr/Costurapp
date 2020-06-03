@@ -6,20 +6,20 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
 val DB_NAME = "costurapp"
-val DB_VERSION = 1
+val DB_VERSION = 2
 
 class CosturappDataBaseHelper(
     context: Context
 ): SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION ) {
     override fun onCreate(db: SQLiteDatabase?) {
-        updateMyDatabase(db, 0/*, DB_VERSION*/)
+        updateMyDatabase(db, 0, DB_VERSION)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        updateMyDatabase(db, oldVersion/*, newVersion*/)
+        updateMyDatabase(db, oldVersion, newVersion)
     }
 
-    fun updateMyDatabase(db: SQLiteDatabase?, oldVersion: Int/*, newVersion:Int*/){
+    fun updateMyDatabase(db: SQLiteDatabase?, oldVersion: Int, newVersion:Int){
         if (oldVersion < 1){
             db?.execSQL(
                 "CREATE TABLE COMPRA (" +
@@ -93,6 +93,15 @@ class CosturappDataBaseHelper(
                 "CREATE TABLE ENCOMENDA_COMPRA(" +
                         "ID_MATERIAL INTEGER," +
                         "QUANTIDADE INTEGER);"
+            )
+        }
+
+        if ((oldVersion < 1)||(newVersion == 2)){
+            db?.execSQL(
+                "ALTER TABLE MATERIAL ADD ATIVO TEXT;"
+            )
+            db?.execSQL(
+                "UPDATE MATERIAL SET ATIVO = 'S';"
             )
         }
     }

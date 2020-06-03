@@ -1,15 +1,19 @@
 package com.example.costurapp.view
 
 import android.content.Context
+import android.content.Intent
+import android.opengl.GLES31Ext
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
+import android.widget.Toast
 import com.example.costurapp.R
 import com.example.costurapp.model.classes.*
-import com.example.costurapp.model.databaseMaterial
+import com.example.costurapp.model.DatabaseCadastroMaterial
 import com.example.costurapp.presenter.CadastroPresenter
+import com.example.costurapp.presenter.ListaCadastroPresenter.Companion.CADASTRO_ID
 import kotlinx.android.synthetic.main.activity_material.*
 import kotlinx.android.synthetic.main.activity_material_botao.*
 import kotlinx.android.synthetic.main.activity_material_linha.*
@@ -17,14 +21,18 @@ import kotlinx.android.synthetic.main.activity_material_tamanhos.*
 import kotlinx.android.synthetic.main.activity_material_tecido.*
 import kotlinx.android.synthetic.main.activity_material_ziper.*
 
-class MaterialActivity : AppCompatActivity(),CadastroPresenter.viewCadastroMaterial {
+class MaterialActivity : AppCompatActivity(),CadastroPresenter.viewCadastro {
 
+    var presenter:CadastroPresenter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_material)
-        desabilitaLayoutEspecificos()
+        presenter = CadastroPresenter(
+            this,
+            DatabaseCadastroMaterial(),
+            intent.extras!!.getLong(CADASTRO_ID).toInt())
 
-        Log.i("teste","chegou aqui ON CREATE")
+        desabilitaLayoutEspecificos()
 
         tipo_material.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
@@ -85,11 +93,23 @@ class MaterialActivity : AppCompatActivity(),CadastroPresenter.viewCadastroMater
             }
             else->layout_tamanhos.visibility = View.VISIBLE
         }
-
         return material
     }
     fun onClickSalvar(view:View){
-        Log.i("teste","chegou aqui activiti")
-        CadastroPresenter(this, databaseMaterial()).insereMaterial()
+        presenter!!.clickSalvar()
+    }
+
+    override fun configuraUI(objetoCadastro: Material?) {
+        objetoCadastro?.TipoMaterial?.index?.let { tipo_material.setSelection(it) }
+        descricao_material.setText(objetoCadastro?.Descricao)
+        objetoCadastro?.UnidadeMedida?.index?.let { unidade_medida.setSelection(it) }
+        nome_material.setText(objetoCadastro?.Nome)
+        estampa_tecido.setText(objetoCadastro?.Estampa)
+        tecido_plano.isChecked = objetoCadastro?.TecidoPlano ?: false
+        tecido_transparente.isChecked = objetoCadastro?.Transparente ?: false
+        //tipoLinha  material.TipoLinha = TipoLinha.from(if (linha_overlock.isChecked){1}else{0})
+        tamanho_material.setSelection(objetoCadastro?.Tamanho?.index?:-1)
+        tipo_zipper.setSelection(objetoCadastro?.TipoZiper?.index?:-1)
+        estampado.isChecked = objetoCadastro?.Estampado ?: false
     }
 }
